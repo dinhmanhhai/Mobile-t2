@@ -95,6 +95,7 @@ class _HomeState extends State<Home> {
         ),
       );
     }
+
   }
 
   void signOut(){
