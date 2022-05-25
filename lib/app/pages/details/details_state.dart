@@ -1,31 +1,31 @@
-part of 'home_cubit.dart';
+part of 'details_cubit.dart';
 
 @immutable
-abstract class HomeState extends Equatable {
-  const HomeState();
+abstract class Details extends Equatable {
+  const Details();
 }
 
-class HomeInitial extends HomeState {
+class HomeInitial extends Details {
   const HomeInitial();
 
   @override
   List<Object> get props => [];
 }
 
-class ChangeView extends HomeState {
+class ChangeView extends Details {
   const ChangeView();
 
   @override
   List<Object> get props => [];
 }
 
-class GridTileView extends HomeState {
+class GridTileView extends Details {
   const GridTileView();
 
   @override
   List<Object> get props => [];
 }
-class ListTileView extends HomeState {
+class ListTileView extends Details {
   const ListTileView();
 
   @override

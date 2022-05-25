@@ -5,16 +5,15 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:get/get.dart';
-import 'package:mobile/app/routers/app_pages.dart';
 
-part 'home_state.dart';
+part 'details_state.dart';
 
-class HomeCubit extends Cubit<HomeState> {
+class DetailsCubit extends Cubit<Details> {
   final BuildContext context;
   bool gridView = false;
+  late Response result;
 
-  HomeCubit(this.context) : super(const HomeInitial()){
+  DetailsCubit(this.context) : super(const HomeInitial()){
     emit(const ListTileView());
   }
 
@@ -27,6 +26,4 @@ class HomeCubit extends Cubit<HomeState> {
       emit(const GridTileView());
     }
   }
-
-  void navigator(int index) => Get.toNamed(Routes.details);
 }
