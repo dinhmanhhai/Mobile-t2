@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mobile/app/routers/app_pages.dart';
+import 'package:mobile/app/utils/api.dart';
 import 'package:mobile/app/utils/application.dart';
 import 'package:mobile/app/utils/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
-import 'app/utils/api.dart';
+import 'app/utils/toast.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,27 +23,28 @@ Future<void> main() async {
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
+  Application.api = API();
+  Application.toast = Toastify();
   Application.sharePreference = await SpUtil.getInstance();
-  runApp(Sizer(builder: (context, orientation, deviceType) {
-    return GetMaterialApp(
-      localizationsDelegates: const [
-        // GlobalCupertinoLocalizations.delegate,
-        // GlobalMaterialLocalizations.delegate,
-        // GlobalWidgetsLocalizations.delegate,
-        // FormBuilderLocalizations.delegate,
-      ],
-      locale: Locale('vi', 'VN'),
-      debugShowCheckedModeBanner: false,
-      title: "Application",
-      initialRoute: AppPages.INITIAL,
-      getPages: AppPages.routes,
-      color: Color(0xFFF58A30),
-      theme: ThemeData(
-        primaryColorDark: Color(0xFFF58A30),
-        primaryColorLight: Color(0xFFF58A30),
-      ),
-    );
-  }));
+  runApp(
+    Sizer(
+      builder: (context, orientation, deviceType) {
+        return GetMaterialApp(
+          localizationsDelegates: const [],
+          locale: Locale('vi', 'VN'),
+          debugShowCheckedModeBanner: false,
+          title: "Application",
+          initialRoute: AppPages.INITIAL,
+          getPages: AppPages.routes,
+          color: Color(0xFFF58A30),
+          theme: ThemeData(
+            primaryColorDark: Color(0xFFF58A30),
+            primaryColorLight: Color(0xFFF58A30),
+          ),
+        );
+      },
+    ),
+  );
   // runApp(ModularApp(module: AppModule(), child: AppWidget()));
 }
 
