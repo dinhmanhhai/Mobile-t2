@@ -8,7 +8,7 @@ import 'package:mobile/app/data/network/network.dart';
 import 'application.dart';
 
 class API {
-  static String baseUrl = ConnectToServer.BaseUrl;
+  static String baseUrl = Platform.isIOS ? ConnectToServer.baseUrlIos : ConnectToServer.baseUrlAndroid;
   static final Dio dio = Dio(
     BaseOptions(
       connectTimeout: 30000,

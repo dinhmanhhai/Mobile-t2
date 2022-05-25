@@ -4,7 +4,6 @@ import 'package:mobile/app/utils/application.dart';
 
 class LoginProvider {
   static Future<dynamic> login(Map<String, dynamic> params) async {
-    print("=================");
-    return API.dio.get(ConnectToServer.login, queryParameters: params);
+    return API.dio.get(ConnectToServer.signIn, queryParameters: params);
   }
 }

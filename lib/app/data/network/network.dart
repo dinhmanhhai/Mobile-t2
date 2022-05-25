@@ -1,4 +1,5 @@
 class ConnectToServer {
-  static String BaseUrl = 'http://localhost:8080/';
-  static String login = 'signup-ctv';
+  static String baseUrlAndroid = 'http://10.0.2.2:9090/';
+  static String baseUrlIos = 'http:/localhost:9090/';
+  static String signIn = '/auth/sign-in';
 }

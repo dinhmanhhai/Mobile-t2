@@ -1,6 +1,5 @@
 part of 'theme.dart';
 
-
 class CustomColors {
   static final Color firebaseNavy = Color(0xFF2C384A);
   static final Color firebaseOrange = Color(0xFFF57C00);
@@ -39,33 +38,19 @@ class ScreenSize {
   static double width = Get.width;
 }
 
-const Color purpleClr = Color(0xFFA0338A);
-const Color yellowClr = Color(0xFFFFB746);
-const Color pinkClr = Color(0xFFF54B80);
-
-const primaryClr = purpleClr;
-const Color darkGreyClr = Color(0xFF121212);
-Color darkHeaderClr = Colors.grey[800]!;
-
-class Themes {
-  static final light = ThemeData(
-    backgroundColor: Colors.grey[100],
-    primaryColor: primaryClr,
-    brightness: Brightness.light,
-  );
-  static final dark = ThemeData(
-    backgroundColor: darkGreyClr,
-    brightness: Brightness.dark,
-    primaryColor: primaryClr,
-  );
-}
-
 TextStyle get subHeadingTextStyle {
   return TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: Get.isDarkMode ? Colors.grey[400] : Colors.grey);
 }
 
 TextStyle get titleTextStyle {
-  return TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Get.isDarkMode ? Colors.white : Colors.black);
+  return TextStyle(
+      fontSize: 18, fontWeight: FontWeight.w400, color: Get.isDarkMode ? Colors.white : CustomColors.regularText);
+}
+
+TextStyle get googleFontTitle {
+  return GoogleFonts.lato(
+      textStyle: TextStyle(
+          fontSize: 18, fontWeight: FontWeight.w400, color: Get.isDarkMode ? Colors.white : CustomColors.regularText));
 }
 
 TextStyle get subTitleTextStle {
@@ -73,5 +58,32 @@ TextStyle get subTitleTextStle {
 }
 
 TextStyle get bodyTextStyle {
-  return TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Get.isDarkMode ? Colors.white : Colors.black);
+  return TextStyle(
+      fontSize: 14, fontWeight: FontWeight.w400, color: Get.isDarkMode ? Colors.white : CustomColors.regularText);
 }
+
+const List<Color> listColors = [
+  Color(0xFF2484A8),
+  Color(0xFFDEEA48),
+  Color(0xFFFC6D9A),
+  Color(0xFF22AB65),
+  Color(0xFFC0AC4C),
+  Color(0xFF4A0077),
+  Color(0xFFEC449E),
+  Color(0xFF24F3E7),
+  Color(0xFFE1C06D),
+  Color(0xFF36A6D4),
+  Color(0xFF8bd6f8),
+  Color(0xFF3BC3C2),
+  Color(0xFFF55CF9),
+  Color(0xFF5719AB),
+  Color(0xFFB1AA6D),
+  Color(0xFFF3B60D),
+  Color(0xFFAC087E),
+  Color(0xFFF20E6C),
+  Color(0xFFCD4D4C),
+  Color(0xFF39BE85),
+  Color(0xFFae9d85),
+  Color(0xFF33D51F),
+  Color(0xFF868708),
+];

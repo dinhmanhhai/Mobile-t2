@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile/app/component/button/CustomButton.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/app/data/theme/theme.dart';
 
 import 'home_cubit.dart';
@@ -25,55 +25,121 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColors.firebaseNavy,
+      backgroundColor: CustomColors.backGroundColor,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(
-            left: 16.0,
-            right: 16.0,
-            bottom: 20.0,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Row(),
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
+        top: false,
+        child: Stack(
+          children: [
+            BlocBuilder<HomeCubit, HomeState>(
+              bloc: _cubit,
+              builder: (context, state) {
+                if (state is ListTileView) {
+                  return SingleChildScrollView(
+                    padding: EdgeInsets.only(
+                        top: ScreenSize.height * .15,
+                        left: ScreenSize.height * .02,
+                        right: ScreenSize.height * .02,
+                        bottom: ScreenSize.height * .04),
+                    child: IntrinsicHeight(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ...List.generate(
+                            20,
+                            (index) => Card(
+                              color: listColors[index],
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Colors.transparent,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: ListTile(
+                                onTap: () => _cubit.navigator(index),
+                                contentPadding: EdgeInsets.symmetric(horizontal: ScreenSize.width * .02),
+                                title: Text(
+                                  "title",
+                                  style: titleTextStyle,
+                                ),
+                                subtitle: Container(
+                                  margin: EdgeInsets.only(right: ScreenSize.width * 0.4),
+                                  child: Text(
+                                    "titlafgsdkhgkjhgflkhdsflkghjlskdfghjlkdjfglkjdslhgjdslkfgjkldsfjgldsjfglkjdsflkgjlksdje",
+                                    overflow: TextOverflow.ellipsis,
+                                    softWrap: true,
+                                    style: subTitleTextStle,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }
+                if (state is GridTileView) {
+                  return GridView.count(crossAxisCount: 2, childAspectRatio: 2 / 1, padding: EdgeInsets.only(top: ScreenSize.height * 0.15), children: [
+                    ...List.generate(
+                      20,
+                      (index) => Card(
+                        color: listColors[index],
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            color: Colors.transparent,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: ListTile(
+                          onTap: () => _cubit.navigator(index),
+                          contentPadding: EdgeInsets.symmetric(horizontal: ScreenSize.width * .02),
+                          title: Text(
+                            "title",
+                            style: titleTextStyle,
+                          ),
+                          subtitle: Container(
+                            margin: EdgeInsets.only(right: ScreenSize.width * 0.1),
+                            child: Text(
+                              "titlafgsdkhgkjhgflkhdsflkghjlskdfghjlkdjfglkjdslhgjdslkfgjkldsfjgldsjfglkjdsflkgjlksdje",
+                              overflow: TextOverflow.ellipsis,
+                              softWrap: true,
+                              style: subTitleTextStle,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]);
+                }
+                return const SizedBox();
+              },
+            ),
+            InkWell(
+              onTap: () => _cubit.changeView(),
+              child: Container(
+                padding: EdgeInsets.all(ScreenSize.height * .02),
+                decoration: const BoxDecoration(
+                  color: CustomColors.backGroundColor,
+                ),
+                child: Row(
                   children: [
-                    Image.asset(
-                      'assets/avatar.jpeg',
-                      height: ScreenSize.height * .1,
-                    ),
-                    SizedBox(height: 20),
-                    Text(
-                      'Note app for PTIT',
-                      style: TextStyle(
-                        color: CustomColors.firebaseYellow,
-                        fontSize: SizeText.size16,
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(300),
+                      child: Image.asset(
+                        'assets/avatar.jpeg',
+                        height: ScreenSize.height * .1,
                       ),
                     ),
                     Text(
-                      'Design by DMH',
-                      style: TextStyle(
-                        color: CustomColors.firebaseOrange,
-                        fontSize: SizeText.size16,
-                      ),
-                    ),
+                      '  Day la ten tai khoan',
+                      style: googleFontTitle.copyWith(fontSize: 24, fontWeight: FontWeight.w500),
+                    )
                   ],
                 ),
               ),
-              CustomButton(
-                width: ScreenSize.width * .60,
-                onPressed: () {},
-                elevation: 8,
-                shadowColor: CustomColors.firebaseYellow,
-                height: ScreenSize.height * .05,
-                child: Text('Login'),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

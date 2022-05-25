@@ -54,6 +54,7 @@ dev_dependencies:
   shared_preferences: ^2.0.9
 #  flutter_form_builder: ^7.2.1
 #  form_builder_validators: ^8.1.1
+  google_fonts: ^2.3.0
   fluttertoast: ^8.0.8
   flutter_bloc: ^8.0.0
   equatable: ^2.0.3
