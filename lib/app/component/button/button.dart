@@ -23,12 +23,12 @@ class Button extends StatelessWidget {
           width: width ?? 100.w,
           alignment: Alignment.center,
           padding: EdgeInsets.symmetric(vertical: 2.h),
-          decoration: BoxDecoration(color: color ?? CustomColor.blueText, borderRadius: BorderRadius.circular(100)),
+          decoration: BoxDecoration(color: color ?? CustomColors.blueText, borderRadius: BorderRadius.circular(100)),
           child: child ??
               Text(
                 "$text",
                 style: TextStyle(
-                  color: CustomColor.backGroundColor,
+                  color: CustomColors.backGroundColor,
                   fontSize: SizeText.size14,
                   fontWeight: FontWeight.w700,
                 ),

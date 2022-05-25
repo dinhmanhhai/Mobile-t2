@@ -1,7 +1,10 @@
 part of 'theme.dart';
 
 
-class CustomColor {
+class CustomColors {
+  static final Color firebaseNavy = Color(0xFF2C384A);
+  static final Color firebaseOrange = Color(0xFFF57C00);
+  static final Color firebaseYellow = Color(0xFFFFCA28);
   static const Color blurredLetters = Color(0xFF828282);
   static const Color greyText = Color(0xFFBDBDBD);
   static const Color blueText = Color(0xFF0077C0);
@@ -10,7 +13,6 @@ class CustomColor {
   static const Color darkBlueText = Color(0xFF02275A);
   static const Color blackBlueText = Color(0xFF223046);
   static const Color bottomNavigatorColor = Color(0xFFF2F5F7);
-  static const Color lightBlue = Color(0xFFE5F1F9);
 }
 
 class GradientColors {
