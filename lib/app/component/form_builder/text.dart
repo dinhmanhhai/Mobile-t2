@@ -5,6 +5,9 @@ import 'package:mobile/app/component/form_builder/impl/text_validate_impl.dart';
 import 'package:mobile/app/config/form_builder/form_config.dart';
 import 'package:mobile/app/data/theme/theme.dart';
 
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
+
 class TextFieldValidate extends StatefulWidget {
   final String name;
   final List<ValidatorEnum>? validator;
@@ -37,6 +40,7 @@ class TextFieldValidate extends StatefulWidget {
   final TextEditingController? controller;
   final TextStyle? hintStyle;
   final String? initialValue;
+  final TextStyle? textStyle;
 
   const TextFieldValidate({
     Key? key,
@@ -71,6 +75,7 @@ class TextFieldValidate extends StatefulWidget {
     this.maxLines,
     this.hintStyle,
     this.initialValue,
+    this.textStyle,
   }) : super(key: key);
 
   @override
@@ -90,50 +95,49 @@ class _TextFieldValidateState extends State<TextFieldValidate> {
   Widget build(BuildContext context) {
     return AbsorbPointer(
       absorbing: widget.readOnly,
-      // child: FormBuilderTextField(
-      //   name: widget.name,
-      //   initialValue: widget.initialValue,
-      //   controller: widget.controller,
-      //   validator: FormBuilderValidators.compose(_textFieldValidateImpl.listValidate(widget.validator, context)),
-      //   onChanged: widget.onChanged,
-      //   inputFormatters: widget.inputFormatters,
-      //   textInputAction: widget.textInputAction,
-      //   onEditingComplete: widget.onEditingComplete,
-      //   obscureText: widget.obscureText,
-      //   autofocus: widget.autoFocus,
-      //   style: titleTextStyle.copyWith(color: CustomColor.regularText),
-      //   keyboardType: widget.keyboardType,
-      //   onReset: widget.onReset,
-      //   onTap: widget.onTap,
-      //   onSaved: widget.onSave,
-      //   onSubmitted: widget.onSubmit,
-      //   expands: false,
-      //   maxLines: widget.maxLines ?? 1,
-      //   decoration: InputDecoration(
-      //     errorStyle: TextStyle(
-      //         fontSize: SizeText.size12,
-      //         color: Colors.red,
-      //         fontWeight: FontWeight.w400,
-      //         decorationThickness: 0,
-      //         height: 1),
-      //     errorText: widget.errorText,
-      //     fillColor: widget.fillColor ?? Colors.white,
-      //     filled: widget.filled ?? true,
-      //     prefixIconConstraints: widget.prefixIconConstraints,
-      //     prefixIcon: widget.prefixIcon,
-      //     suffixIcon: widget.suffixIcon,
-      //     suffixIconConstraints: widget.suffixIconConstraints,
-      //     contentPadding: contentPaddingStyle(),
-      //     border: borderStyle(),
-      //     enabledBorder: borderStyle(),
-      //     focusedBorder: borderStyle(),
-      //     alignLabelWithHint: true,
-      //     labelText: widget.labelText,
-      //     labelStyle: titleTextStyle,
-      //     hintText: widget.hintText,
-      //     hintStyle: widget.hintStyle ?? titleTextStyle.copyWith(color: CustomColor.blurredLetters),
-      //   ),
-      // ),
+      child: FormBuilderTextField(
+        name: widget.name,
+        initialValue: widget.initialValue,
+        controller: widget.controller,
+        validator: FormBuilderValidators.compose(_textFieldValidateImpl.listValidate(widget.validator, context)),
+        onChanged: widget.onChanged,
+        inputFormatters: widget.inputFormatters,
+        textInputAction: widget.textInputAction,
+        onEditingComplete: widget.onEditingComplete,
+        obscureText: widget.obscureText,
+        autofocus: widget.autoFocus,
+        style: widget.textStyle ?? titleTextStyle.copyWith(color: CustomColors.regularText, fontSize: SizeText.size20),
+        keyboardType: widget.keyboardType,
+        onReset: widget.onReset,
+        onTap: widget.onTap,
+        onSaved: widget.onSave,
+        onSubmitted: widget.onSubmit,
+        expands: false,
+        maxLines: widget.maxLines,
+        decoration: InputDecoration(
+          errorStyle: TextStyle(
+              fontSize: SizeText.size12,
+              color: Colors.red,
+              fontWeight: FontWeight.w400,
+              decorationThickness: 0,
+              height: 1),
+          errorText: widget.errorText,
+          fillColor: widget.fillColor ?? Colors.white,
+          filled: widget.filled,
+          prefixIconConstraints: widget.prefixIconConstraints,
+          prefixIcon: widget.prefixIcon,
+          suffixIcon: widget.suffixIcon,
+          suffixIconConstraints: widget.suffixIconConstraints,
+          contentPadding: contentPaddingStyle(),
+          alignLabelWithHint: true,
+          border: InputBorder.none,
+          labelText: widget.labelText,
+          labelStyle: titleTextStyle,
+          hintText: widget.hintText,
+          hintStyle: widget.hintStyle ?? titleTextStyle.copyWith(color: Colors.transparent,
+          ),
+        ),
+      ),
     );
   }
 }

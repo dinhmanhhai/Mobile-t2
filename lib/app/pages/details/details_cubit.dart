@@ -8,22 +8,18 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 part 'details_state.dart';
 
-class DetailsCubit extends Cubit<Details> {
+class DetailsCubit extends Cubit<DetailsState> {
   final BuildContext context;
-  bool gridView = false;
-  late Response result;
 
-  DetailsCubit(this.context) : super(const HomeInitial()){
-    emit(const ListTileView());
-  }
+  DetailsCubit(this.context) : super(const DetailsInitial());
 
-  void changeView(){
-    emit(const ChangeView());
-    gridView = !gridView;
-    if(!gridView) {
-      emit(const ListTileView());
-    } else {
-      emit(const GridTileView());
+  Future<bool> saveNote() async {
+    try{
+      emit(const Uploading());
+      return false;
+    } catch(e){
+      emit(const DetailsInitial());
+      return false;
     }
   }
 }

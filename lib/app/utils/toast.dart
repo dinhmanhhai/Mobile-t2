@@ -80,7 +80,7 @@ class Toastify {
               style: TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: SizeText.size14,
-                color: CustomColors.blackBlueText,
+                color: CustomColors.firebaseNavy,
               ),
             ),
           ),
