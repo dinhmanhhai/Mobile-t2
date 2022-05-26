@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/app/data/theme/theme.dart';
+import 'package:sizer/sizer.dart';
 
 import 'home_cubit.dart';
 
@@ -32,8 +33,7 @@ class _HomeViewState extends State<HomeView> {
           elevation: 0.0,
           child: Icon(Icons.add),
           backgroundColor: Color(0xFFE57373),
-          onPressed: () => _cubit.navigator(0)
-      ),
+          onPressed: () => _cubit.navigator(0)),
       body: SafeArea(
         top: Platform.isIOS,
         child: Stack(
@@ -63,36 +63,59 @@ class _HomeViewState extends State<HomeView> {
                   );
                 }
                 if (state is GridTileView) {
-                  return GridView.count(crossAxisCount: 2, childAspectRatio: 2 / 1, padding: EdgeInsets.only(top: ScreenSize.height * 0.15), children: [
-                    ...List.generate(
-                      20,
-                      (index) => cardComponent(index),
-                    ),
-                  ]);
+                  return GridView.count(
+                      crossAxisCount: 2,
+                      childAspectRatio: 2 / 1,
+                      padding: EdgeInsets.only(top: ScreenSize.height * 0.15),
+                      children: [
+                        ...List.generate(
+                          20,
+                          (index) => cardComponent(index),
+                        ),
+                      ]);
                 }
                 return const SizedBox();
               },
             ),
-            InkWell(
-              onTap: () => _cubit.changeView(),
-              child: Container(
-                padding: EdgeInsets.all(ScreenSize.height * .02),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                ),
-                child: Row(
+            Container(
+              padding: EdgeInsets.all(ScreenSize.height * .02),
+              decoration: BoxDecoration(
+                color: Colors.white,
+              ),
+              child: IntrinsicHeight(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(300),
-                      child: Image.asset(
-                        'assets/avatar.jpeg',
-                        height: ScreenSize.height * .1,
+                    InkWell(
+                      onTap: () => _showDialog(),
+                      child: Container(
+                        margin: EdgeInsets.only(right: 4.w),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: CustomColors.yellowText,
+                            width: 2,
+                          ),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(Icons.more_horiz_sharp, color: CustomColors.yellowText, size: 18),
                       ),
                     ),
-                    Text(
-                      '  Day la ten tai khoan',
-                      style: titleTextStyle.copyWith(fontSize: 24, fontWeight: FontWeight.w500, color: CustomColors.firebaseYellow),
-                    )
+                    Row(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(300),
+                          child: Image.asset(
+                            'assets/avatar.jpeg',
+                            height: 10.h,
+                          ),
+                        ),
+                        Text(
+                          '  Day la ten tai khoan',
+                          style: titleTextStyle.copyWith(
+                              fontSize: 24, fontWeight: FontWeight.w500, color: CustomColors.firebaseYellow),
+                        )
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -103,7 +126,7 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Widget cardComponent(int index){
+  Widget cardComponent(int index) {
     return Card(
       color: CustomColors.cardColor,
       shape: RoundedRectangleBorder(
@@ -126,6 +149,42 @@ class _HomeViewState extends State<HomeView> {
             overflow: TextOverflow.ellipsis,
             softWrap: true,
             style: subTitleTextStle,
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showDialog() {
+    showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) => Material(
+        child: Container(
+          height: 50.h,
+          width: 100.w,
+          padding: EdgeInsets.only(top: 2.h),
+          margin: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          color: CupertinoColors.systemBackground.resolveFrom(context),
+          child: SafeArea(
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    InkWell(
+                      onTap: () => _cubit.changeView(),
+                      child: Icon(
+                        Icons.folder,
+                        color: CustomColors.yellowText,
+                        size: 10.h,
+                      ),
+                    ),
+                    Text('Tất cả ghi chú', style: titleTextStyle.copyWith(color: CustomColors.regularText,),)
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

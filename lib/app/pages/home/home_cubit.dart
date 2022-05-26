@@ -27,6 +27,7 @@ class HomeCubit extends Cubit<HomeState> {
     } else {
       emit(const GridTileView());
     }
+    Get.back();
   }
 
   void navigator(int index) {
