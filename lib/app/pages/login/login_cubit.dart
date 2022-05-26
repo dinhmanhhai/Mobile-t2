@@ -1,18 +1,20 @@
 import 'dart:async';
 
-import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:mobile/app/config/toast/toast_config.dart';
+import 'package:mobile/app/data/i18n/i18n.dart';
 import 'package:mobile/app/pages/home/providers/home_provider.dart';
-import 'package:get/get.dart';
-import 'package:mobile/app/routers/app_pages.dart';
+import 'package:mobile/app/utils/toast.dart';
+import 'package:dio/dio.dart';
 
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   final BuildContext context;
+
   // late Response result;
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
@@ -20,18 +22,20 @@ class LoginCubit extends Cubit<LoginState> {
 
   Future<void> login() async {
     try {
-     // print(await LoginProvider.login({}));
-      // GoogleSignInAccount? res = await _googleSignIn.signIn();
-      // res?.id;
-      // res?.displayName;
-      // res?.displayName;
-      // res?.email;
-      // res?.photoUrl;
-      // res?.serverAuthCode;
-      // print(res.toString());
-      Get.toNamed(Routes.home);
+      GoogleSignInAccount? res = await _googleSignIn.signIn();
+      print(res);
+      Map<String, dynamic> params = {
+        'displayName': res?.displayName ?? '',
+        'userId': res?.id ?? '',
+        'email': res?.email ?? '',
+        'photoUrl': res?.photoUrl,
+        'serverAuthCode': res?.serverAuthCode,
+      };
+      Response response = await LoginProvider.login(params);
+      print(response.data);
+      // Get.toNamed(Routes.home);
     } catch (e) {
-      print('Error signing in $e');
+      Toastify.showToast(ToastState.failure, "Network Exception".i18n, context);
     }
   }
 

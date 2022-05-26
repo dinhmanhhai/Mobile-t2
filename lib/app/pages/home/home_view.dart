@@ -25,7 +25,13 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColors.backGroundColor,
+      backgroundColor: Colors.white,
+      floatingActionButton: FloatingActionButton(
+          elevation: 0.0,
+          child: Icon(Icons.add),
+          backgroundColor: Color(0xFFE57373),
+          onPressed: () => _cubit.navigator(0)
+      ),
       body: SafeArea(
         top: false,
         child: Stack(
@@ -47,32 +53,7 @@ class _HomeViewState extends State<HomeView> {
                         children: [
                           ...List.generate(
                             20,
-                            (index) => Card(
-                              color: listColors[index],
-                              shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                  color: Colors.transparent,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: ListTile(
-                                onTap: () => _cubit.navigator(index),
-                                contentPadding: EdgeInsets.symmetric(horizontal: ScreenSize.width * .02),
-                                title: Text(
-                                  "title",
-                                  style: titleTextStyle,
-                                ),
-                                subtitle: Container(
-                                  margin: EdgeInsets.only(right: ScreenSize.width * 0.4),
-                                  child: Text(
-                                    "titlafgsdkhgkjhgflkhdsflkghjlskdfghjlkdjfglkjdslhgjdslkfgjkldsfjgldsjfglkjdsflkgjlksdje",
-                                    overflow: TextOverflow.ellipsis,
-                                    softWrap: true,
-                                    style: subTitleTextStle,
-                                  ),
-                                ),
-                              ),
-                            ),
+                            (index) => cardComponent(index),
                           ),
                         ],
                       ),
@@ -83,32 +64,7 @@ class _HomeViewState extends State<HomeView> {
                   return GridView.count(crossAxisCount: 2, childAspectRatio: 2 / 1, padding: EdgeInsets.only(top: ScreenSize.height * 0.15), children: [
                     ...List.generate(
                       20,
-                      (index) => Card(
-                        color: listColors[index],
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(
-                            color: Colors.transparent,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: ListTile(
-                          onTap: () => _cubit.navigator(index),
-                          contentPadding: EdgeInsets.symmetric(horizontal: ScreenSize.width * .02),
-                          title: Text(
-                            "title",
-                            style: titleTextStyle,
-                          ),
-                          subtitle: Container(
-                            margin: EdgeInsets.only(right: ScreenSize.width * 0.1),
-                            child: Text(
-                              "titlafgsdkhgkjhgflkhdsflkghjlskdfghjlkdjfglkjdslhgjdslkfgjkldsfjgldsjfglkjdsflkgjlksdje",
-                              overflow: TextOverflow.ellipsis,
-                              softWrap: true,
-                              style: subTitleTextStle,
-                            ),
-                          ),
-                        ),
-                      ),
+                      (index) => cardComponent(index),
                     ),
                   ]);
                 }
@@ -119,8 +75,8 @@ class _HomeViewState extends State<HomeView> {
               onTap: () => _cubit.changeView(),
               child: Container(
                 padding: EdgeInsets.all(ScreenSize.height * .02),
-                decoration: const BoxDecoration(
-                  color: CustomColors.backGroundColor,
+                decoration: BoxDecoration(
+                  color: Colors.white,
                 ),
                 child: Row(
                   children: [
@@ -133,13 +89,42 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     Text(
                       '  Day la ten tai khoan',
-                      style: googleFontTitle.copyWith(fontSize: 24, fontWeight: FontWeight.w500),
+                      style: googleFontTitle.copyWith(fontSize: 24, fontWeight: FontWeight.w500, color: CustomColors.firebaseYellow),
                     )
                   ],
                 ),
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget cardComponent(int index){
+    return Card(
+      color: Color(0xFF1B1B1D).withOpacity(0.6),
+      shape: RoundedRectangleBorder(
+        side: BorderSide(
+          color: Colors.transparent,
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: ListTile(
+        onTap: () => _cubit.navigator(index),
+        contentPadding: EdgeInsets.symmetric(horizontal: ScreenSize.width * .02),
+        title: Text(
+          "title",
+          style: titleTextStyle,
+        ),
+        subtitle: Padding(
+          padding: EdgeInsets.only(top: ScreenSize.width * .01),
+          child: Text(
+            "titlafgsdkhgkjhgflkhdsflkghjlskdfghjlkdjfglkjdslhgjdslkfgjkldsfjgldsjfglkjdsflkgjlksdje",
+            overflow: TextOverflow.ellipsis,
+            softWrap: true,
+            style: subTitleTextStle,
+          ),
         ),
       ),
     );
