@@ -38,13 +38,8 @@ class ScreenSize {
   static double width = Get.width;
 }
 
-TextStyle get subHeadingTextStyle {
-  return TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: Get.isDarkMode ? Colors.grey[400] : Colors.grey);
-}
-
 TextStyle get titleTextStyle {
-  return TextStyle(
-      fontSize: 18, fontWeight: FontWeight.w400, color: Get.isDarkMode ? Colors.white : CustomColors.regularText);
+  return TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Colors.white);
 }
 
 TextStyle get googleFontTitle {
@@ -54,12 +49,7 @@ TextStyle get googleFontTitle {
 }
 
 TextStyle get subTitleTextStle {
-  return TextStyle(fontSize: 16, color: Get.isDarkMode ? Colors.grey[400] : Colors.grey[700]);
-}
-
-TextStyle get bodyTextStyle {
-  return TextStyle(
-      fontSize: 14, fontWeight: FontWeight.w400, color: Get.isDarkMode ? Colors.white : CustomColors.regularText);
+  return TextStyle(fontSize: 16, color: Colors.grey[400]);
 }
 
 const List<Color> listColors = [

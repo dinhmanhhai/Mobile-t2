@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:get/get.dart';
+import 'package:mobile/app/pages/details/details_view.dart';
 import 'package:mobile/app/routers/app_pages.dart';
 
 part 'home_state.dart';
@@ -28,5 +29,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  void navigator(int index) => Get.toNamed(Routes.details);
+  void navigator(int index) {
+    Get.to(() => DetailsView());
+  }
 }

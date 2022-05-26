@@ -7,6 +7,8 @@ import 'package:mobile/app/utils/api.dart';
 import 'package:mobile/app/utils/application.dart';
 import 'package:mobile/app/utils/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:form_builder_validators/localization/l10n.dart';
 
 import 'app/utils/toast.dart';
 
@@ -30,7 +32,12 @@ Future<void> main() async {
     Sizer(
       builder: (context, orientation, deviceType) {
         return GetMaterialApp(
-          localizationsDelegates: const [],
+          localizationsDelegates: const [
+            GlobalCupertinoLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            FormBuilderLocalizations.delegate,
+          ],
           locale: Locale('vi', 'VN'),
           debugShowCheckedModeBanner: false,
           title: "Application",
