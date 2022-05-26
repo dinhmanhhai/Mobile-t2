@@ -1,8 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:mobile/app/data/theme/theme.dart';
 import 'package:sizer/sizer.dart';
 
@@ -35,7 +34,7 @@ class _HomeViewState extends State<HomeView> {
           backgroundColor: Color(0xFFE57373),
           onPressed: () => _cubit.navigator(0)),
       body: SafeArea(
-        top: Platform.isIOS,
+        top: true,
         child: Stack(
           children: [
             BlocBuilder<HomeCubit, HomeState>(
@@ -43,11 +42,7 @@ class _HomeViewState extends State<HomeView> {
               builder: (context, state) {
                 if (state is ListTileView) {
                   return SingleChildScrollView(
-                    padding: EdgeInsets.only(
-                        top: ScreenSize.height * .15,
-                        left: ScreenSize.height * .02,
-                        right: ScreenSize.height * .02,
-                        bottom: ScreenSize.height * .04),
+                    padding: EdgeInsets.only(top: 15.h, left: 2.h, right: 2.h, bottom: 3.h),
                     child: IntrinsicHeight(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -159,30 +154,87 @@ class _HomeViewState extends State<HomeView> {
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) => Material(
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
         child: Container(
           height: 50.h,
           width: 100.w,
-          padding: EdgeInsets.only(top: 2.h),
-          margin: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          color: CupertinoColors.systemBackground.resolveFrom(context),
+          padding: EdgeInsets.all(2.w),
+          // margin: EdgeInsets.only(
+          //   bottom: MediaQuery.of(context).viewInsets.bottom,
+          // ),
           child: SafeArea(
             child: Column(
               children: [
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    InkWell(
-                      onTap: () => _cubit.changeView(),
-                      child: Icon(
-                        Icons.folder,
-                        color: CustomColors.yellowText,
-                        size: 10.h,
-                      ),
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () => _cubit.changeView(),
+                          child: Icon(
+                            Icons.folder,
+                            color: CustomColors.yellowText,
+                            size: 10.h,
+                          ),
+                        ),
+                        Text(
+                          'Tất cả ghi chú',
+                          style: titleTextStyle.copyWith(
+                            color: CustomColors.regularText,
+                          ),
+                        ),
+                      ],
                     ),
-                    Text('Tất cả ghi chú', style: titleTextStyle.copyWith(color: CustomColors.regularText,),)
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: Align(
+                          alignment: Alignment.topRight,
+                          child: SvgPicture.asset(
+                            "assets/x-icon.svg",
+                            height: 4.h,
+                            fit: BoxFit.fitHeight,
+                          ),
+                        ),
+                      ),
+                    )
                   ],
-                )
+                ),
+                SizedBox(
+                  height: 4.h,
+                ),
+                InkWell(
+                  onTap: () => _cubit.changeView(),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 2.w),
+                    decoration: BoxDecoration(
+                      color: CustomColors.greyText,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      children: [
+                        BlocBuilder<HomeCubit, HomeState>(
+                          bloc: _cubit,
+                          builder: (context, state) {
+                            if (state is ListTileView) {
+                              return Text(
+                                'Xem dưới dạng khung hình',
+                                style: titleTextStyle.copyWith(color: CustomColors.regularText),
+                              );
+                            } else {
+                              return Text(
+                                'Xem dưới dạng danh sách',
+                                style: titleTextStyle.copyWith(color: CustomColors.regularText),
+                              );
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

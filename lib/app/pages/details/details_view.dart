@@ -33,35 +33,35 @@ class _DetailsViewState extends State<DetailsView> {
     return Scaffold(
       backgroundColor: CustomColors.backGroundColor,
       body: SafeArea(
-        top: Platform.isIOS,
+        top: true,
         child: Stack(
           children: [
-            Padding(
+            SingleChildScrollView(
               padding: EdgeInsets.only(top: 10.h),
               child: Column(
                 children: [
                   TextFieldValidate(
                     name: "title",
-                    fillColor: Colors.red,
+                    // fillColor: Colors.red,
+                    fillColor: CustomColors.backGroundColor,
                     filled: true,
                     textStyle: titleTextStyle.copyWith(color: CustomColors.regularText, fontSize: SizeText.size24),
                     keyboardType: TextInputType.multiline,
                     maxLines: null,
                     prefixIconConstraints: BoxConstraints(),
-                    hintText: 'Nhập số tài khoản',
                     validator: [],
                   ),
-                  Expanded(
+                  Container(
+                    height: 40.h,
                     child: TextFieldValidate(
                       name: "title",
-                      fillColor: Colors.blue,
-                      // fillColor: CustomColors.backGroundColor,
+                      // fillColor: Colors.blue,
+                      fillColor: CustomColors.backGroundColor,
                       filled: true,
                       textStyle: titleTextStyle.copyWith(color: CustomColors.regularText, fontSize: SizeText.size16),
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
                       prefixIconConstraints: const BoxConstraints(),
-                      hintText: 'Nhập số tài khoản',
                       validator: [],
                     ),
                   ),
