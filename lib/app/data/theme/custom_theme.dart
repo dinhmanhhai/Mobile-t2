@@ -1,17 +1,17 @@
 part of 'theme.dart';
 
 class CustomColors {
-  static final Color firebaseNavy = Color(0xFF2C384A);
-  static final Color firebaseOrange = Color(0xFFF57C00);
-  static final Color firebaseYellow = Color(0xFFFFCA28);
-  static const Color blurredLetters = Color(0xFF828282);
+  static final Color firebaseNavy = Color(0xFF2c384a);
+  static final Color firebaseOrange = Color(0xFFf57b00);
+  static final Color firebaseYellow = Color(0xFFfeca27);
+  static const Color yellowText = Color(0xFFffd455);
   static const Color greyText = Color(0xFFBDBDBD);
   static const Color blueText = Color(0xFF0077C0);
   static const Color regularText = Color(0xFF333333);
   static const Color backGroundColor = Color(0xFFF2F2F2);
   static const Color darkBlueText = Color(0xFF02275A);
-  static const Color blackBlueText = Color(0xFF223046);
-  static const Color bottomNavigatorColor = Color(0xFFF2F5F7);
+  static const Color floatingButtonColor = Color(0xFFe57373);
+  static const Color cardColor = Color(0xFF5a5a5b);
 }
 
 class GradientColors {
@@ -31,6 +31,11 @@ class SizeText {
   static double size14 = 14.0;
   static double size16 = 16.0;
   static double size18 = 18.0;
+  static double size20 = 20.0;
+  static double size22 = 22.0;
+  static double size24 = 24.0;
+  static double size26 = 26.0;
+  static double size28 = 28.0;
 }
 
 class ScreenSize {
@@ -39,17 +44,11 @@ class ScreenSize {
 }
 
 TextStyle get titleTextStyle {
-  return TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Colors.white);
-}
-
-TextStyle get googleFontTitle {
-  return GoogleFonts.lato(
-      textStyle: TextStyle(
-          fontSize: 18, fontWeight: FontWeight.w400, color: Get.isDarkMode ? Colors.white : CustomColors.regularText));
+  return TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: CustomColors.yellowText);
 }
 
 TextStyle get subTitleTextStle {
-  return TextStyle(fontSize: 16, color: Colors.grey[400]);
+  return TextStyle(fontSize: 16, color: CustomColors.yellowText);
 }
 
 const List<Color> listColors = [

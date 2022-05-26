@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,7 +35,7 @@ class _HomeViewState extends State<HomeView> {
           onPressed: () => _cubit.navigator(0)
       ),
       body: SafeArea(
-        top: false,
+        top: Platform.isIOS,
         child: Stack(
           children: [
             BlocBuilder<HomeCubit, HomeState>(
@@ -89,7 +91,7 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     Text(
                       '  Day la ten tai khoan',
-                      style: googleFontTitle.copyWith(fontSize: 24, fontWeight: FontWeight.w500, color: CustomColors.firebaseYellow),
+                      style: titleTextStyle.copyWith(fontSize: 24, fontWeight: FontWeight.w500, color: CustomColors.firebaseYellow),
                     )
                   ],
                 ),
@@ -103,7 +105,7 @@ class _HomeViewState extends State<HomeView> {
 
   Widget cardComponent(int index){
     return Card(
-      color: Color(0xFF1B1B1D).withOpacity(0.6),
+      color: CustomColors.cardColor,
       shape: RoundedRectangleBorder(
         side: BorderSide(
           color: Colors.transparent,
