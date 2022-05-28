@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mobile/app/component/circular/circular.dart';
 import 'package:mobile/app/data/theme/theme.dart';
+import 'package:mobile/app/utils/application.dart';
 import 'package:sizer/sizer.dart';
 
 import 'home_cubit.dart';
@@ -111,11 +112,15 @@ class _HomeViewState extends State<HomeView> {
                             height: 10.h,
                           ),
                         ),
-                        Text(
-                          'Day la ten tai khoan',
-                          style: titleTextStyle.copyWith(
-                              fontSize: 24, fontWeight: FontWeight.w500, color: CustomColors.firebaseYellow),
-                        )
+                        BlocBuilder<HomeCubit, HomeState>(
+                          bloc: _cubit,
+                          builder: (context, state) {
+                          return Text(
+                            '   ${Application.displayName}',
+                            style: titleTextStyle.copyWith(
+                                fontSize: 19, fontWeight: FontWeight.w500, color: CustomColors.firebaseYellow),
+                          );
+                        },),
                       ],
                     ),
                   ],
