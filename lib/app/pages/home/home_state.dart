@@ -25,8 +25,17 @@ class GridTileView extends HomeState {
   @override
   List<Object> get props => [];
 }
+
 class ListTileView extends HomeState {
   const ListTileView();
+
+  @override
+  List<Object> get props => [];
+}
+
+
+class FetchingNotes extends HomeState {
+  const FetchingNotes();
 
   @override
   List<Object> get props => [];
