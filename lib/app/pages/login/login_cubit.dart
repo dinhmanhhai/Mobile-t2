@@ -36,6 +36,7 @@ class LoginCubit extends Cubit<LoginState> {
       //   print(result.status);
       //   print(result.message);
       // }
+
       GoogleSignInAccount? res = await _googleSignIn.signIn();
       print(res);
       Map<String, dynamic> params = {
@@ -46,11 +47,11 @@ class LoginCubit extends Cubit<LoginState> {
         'serverAuthCode': res?.serverAuthCode,
       };
       Response response = await LoginProvider.login(params);
-      print(response.data);
-      if(response.data['status']){
+      if(response.data?['status'] == true){
         Application.sharePreference?.putString('token', response.data['data']['token']);
         Get.toNamed(Routes.home);
       }
+      Toastify.showToast(ToastState.failure, "Network Exception".i18n, context);
     } catch (e) {
       Toastify.showToast(ToastState.failure, "Network Exception".i18n, context);
     }
