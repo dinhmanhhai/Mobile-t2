@@ -5,8 +5,12 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:mobile/app/pages/details/providers/home_provider.dart';
+import 'package:get/route_manager.dart';
+import 'package:mobile/app/config/toast/toast_config.dart';
+import 'package:mobile/app/data/i18n/i18n.dart';
+import 'package:mobile/app/pages/details/providers/details_provider.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:mobile/app/utils/toast.dart';
 
 part 'details_state.dart';
 
@@ -17,11 +21,23 @@ class DetailsCubit extends Cubit<DetailsState> {
 
   DetailsCubit(this.context) : super(const DetailsInitial());
 
-  Future<bool> saveNote() async {
+  Future<bool> saveNote(int? updateNoteId) async {
     try{
       emit(const Uploading());
-      Response response = await _detailsProvider.createNote(noteCreate.currentState?.value ?? {});
+      late Response response;
+      if(updateNoteId != null){
+        Map<String, dynamic> params = {
+          'id': updateNoteId,
+        };
+        params.addAll(noteCreate.currentState?.value ?? {});
+        response = await _detailsProvider.rewriteNote(params);
+        print(response);
+      } else {
+        response = await _detailsProvider.createNote(noteCreate.currentState?.value ?? {});
+      }
       if(response.data?['status'] == true){
+        Toastify.showToast(ToastState.success, updateNoteId == null ? "Create note success".i18n : "Edit note success".i18n, context);
+        Get.back(result: true);
         return true;
       }
       emit(const DetailsInitial());
@@ -32,9 +48,8 @@ class DetailsCubit extends Cubit<DetailsState> {
     }
   }
 
-  void createNote() {
-    if(noteCreate.currentState?.saveAndValidate() == true){
-      saveNote();
-    }
+  void createNote(int? updateNoteId) {
+    noteCreate.currentState?.save();
+      saveNote(updateNoteId);
   }
 }

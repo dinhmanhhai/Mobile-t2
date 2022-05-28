@@ -16,12 +16,11 @@ part 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   final BuildContext context;
   bool gridView = false;
-  NoteUser? noteUser;
+  NoteUserResponse? noteUser;
   final HomeProvider _homeProvider = HomeProvider();
 
   HomeCubit(this.context) : super(const HomeInitial()){
     getListNotes();
-    emit(const ListTileView());
   }
 
   void changeView(){
@@ -40,7 +39,7 @@ class HomeCubit extends Cubit<HomeState> {
       emit(const FetchingNotes());
       Response response = await _homeProvider.listNotes();
       if(response.data?['status'] == true){
-        noteUser = NoteUser.fromJson(response.data);
+        noteUser = NoteUserResponse.fromJson(response.data);
         emit(const ListTileView());
         return true;
       }
@@ -50,7 +49,17 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  void navigator(int index) {
-    Get.to(() => DetailsView());
+  void navigator(int? index) async {
+    if(index != null){
+      bool? res = await Get.to(() => DetailsView(data: noteUser?.data![index]));
+      if(res == true){
+        getListNotes();
+      }
+    } else {
+      bool? res = await Get.to(() => DetailsView());
+      if(res == true){
+        getListNotes();
+      }
+    }
   }
 }

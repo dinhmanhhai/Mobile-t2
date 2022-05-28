@@ -8,7 +8,7 @@ class DetailsProvider {
   }
   Future<dynamic> rewriteNote(Map<String, dynamic> params) async {
     print(params);
-    String url = ConnectToServer.rewriteNote.replaceFirst('{id}}', params['id']);
+    String url = ConnectToServer.rewriteNote.replaceFirst('{id}', params['id'].toString());
     print(url);
     return API.dio.post(url, data: params);
   }

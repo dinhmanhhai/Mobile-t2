@@ -50,6 +50,7 @@ class LoginCubit extends Cubit<LoginState> {
       if(response.data?['status'] == true){
         Application.sharePreference?.putString('token', response.data['data']['token']);
         Get.toNamed(Routes.home);
+        return;
       }
       Toastify.showToast(ToastState.failure, "Network Exception".i18n, context);
     } catch (e) {

@@ -33,7 +33,7 @@ class _HomeViewState extends State<HomeView> {
           elevation: 0.0,
           child: Icon(Icons.add),
           backgroundColor: Color(0xFFE57373),
-          onPressed: () => _cubit.navigator(0)),
+          onPressed: () => _cubit.navigator(null)),
       body: SafeArea(
         top: true,
         child: Stack(

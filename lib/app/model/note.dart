@@ -1,21 +1,21 @@
-class NoteUser {
+class NoteUserResponse {
   bool? status;
   String? message;
   int? httpCode;
-  List<Data>? data;
+  List<NoteUser>? data;
   String? errorCode;
 
-  NoteUser(
+  NoteUserResponse(
       {this.status, this.message, this.httpCode, this.data, this.errorCode});
 
-  NoteUser.fromJson(Map<String, dynamic> json) {
+  NoteUserResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     httpCode = json['httpCode'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <NoteUser>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(new NoteUser.fromJson(v));
       });
     }
     errorCode = json['errorCode'];
@@ -34,7 +34,7 @@ class NoteUser {
   }
 }
 
-class Data {
+class NoteUser {
   int? id;
   String? userId;
   String? title;
@@ -45,7 +45,7 @@ class Data {
   bool? isDeleted;
   String? color;
 
-  Data(
+  NoteUser(
       {this.id,
         this.userId,
         this.title,
@@ -56,7 +56,7 @@ class Data {
         this.isDeleted,
         this.color});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  NoteUser.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['userId'];
     title = json['title'];

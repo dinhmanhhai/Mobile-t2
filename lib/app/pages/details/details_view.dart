@@ -7,13 +7,15 @@ import 'package:get/get.dart';
 import 'package:mobile/app/component/circular/circular.dart';
 import 'package:mobile/app/component/form_builder/text.dart';
 import 'package:mobile/app/data/theme/theme.dart';
+import 'package:mobile/app/model/note.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'details_cubit.dart';
 
 class DetailsView extends StatefulWidget {
-  const DetailsView({Key? key}) : super(key: key);
+  final NoteUser? data;
+  const DetailsView({Key? key, this.data}) : super(key: key);
 
   @override
   _DetailsViewState createState() => _DetailsViewState();
@@ -48,6 +50,7 @@ class _DetailsViewState extends State<DetailsView> {
                       // fillColor: Colors.red,
                       fillColor: CustomColors.backGroundColor,
                       filled: true,
+                      initialValue: widget.data?.title,
                       textStyle: titleTextStyle.copyWith(color: CustomColors.regularText, fontSize: SizeText.size24),
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
@@ -57,10 +60,11 @@ class _DetailsViewState extends State<DetailsView> {
                     Container(
                       height: 40.h,
                       child: TextFieldValidate(
-                        name: "title",
+                        name: "content",
                         // fillColor: Colors.blue,
                         fillColor: CustomColors.backGroundColor,
                         filled: true,
+                        initialValue: widget.data?.content,
                         textStyle: titleTextStyle.copyWith(color: CustomColors.regularText, fontSize: SizeText.size16),
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
@@ -103,7 +107,7 @@ class _DetailsViewState extends State<DetailsView> {
                           child: const Icon(Icons.more_horiz_sharp, color: CustomColors.yellowText, size: 18),
                         ),
                         InkWell(
-                          onTap: () => _cubit.createNote(),
+                          onTap: () => _cubit.createNote(widget.data?.id),
                           child: Text(
                             'Xong',
                             style: titleTextStyle,
