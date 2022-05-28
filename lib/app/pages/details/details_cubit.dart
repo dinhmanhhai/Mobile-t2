@@ -59,11 +59,11 @@ class DetailsCubit extends Cubit<DetailsState> {
         Get.back(result: true);
         return true;
       }
-      Toastify.showToast(ToastState.success, "Network Exception".i18n, context);
+      Toastify.showToast(ToastState.failure, "Network Exception".i18n, context);
       emit(const DetailsInitial());
       return false;
     } catch (e) {
-      Toastify.showToast(ToastState.success, "Network Exception".i18n, context);
+      Toastify.showToast(ToastState.failure, "Network Exception".i18n, context);
       emit(const DetailsInitial());
       return false;
     }

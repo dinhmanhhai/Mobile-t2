@@ -7,4 +7,5 @@ class Application {
   static late API api;
   static SpUtil? sharePreference;
   static late Toastify toast;
+  static String displayName = '';
 }
