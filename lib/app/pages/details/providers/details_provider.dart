@@ -7,9 +7,11 @@ class DetailsProvider {
     return API.dio.post(ConnectToServer.createNote, data: params);
   }
   Future<dynamic> rewriteNote(Map<String, dynamic> params) async {
-    print(params);
     String url = ConnectToServer.rewriteNote.replaceFirst('{id}', params['id'].toString());
-    print(url);
     return API.dio.post(url, data: params);
+  }
+  Future<dynamic> deleteNote(int id) async {
+    String url = ConnectToServer.deleteNote.replaceFirst('{id}', id.toString());
+    return API.dio.post(url);
   }
 }

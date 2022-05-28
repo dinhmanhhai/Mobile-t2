@@ -161,14 +161,11 @@ class _HomeViewState extends State<HomeView> {
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) => Material(
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: const Radius.circular(15)),
         child: Container(
           height: 50.h,
           width: 100.w,
           padding: EdgeInsets.all(2.w),
-          // margin: EdgeInsets.only(
-          //   bottom: MediaQuery.of(context).viewInsets.bottom,
-          // ),
           child: SafeArea(
             child: Column(
               children: [
