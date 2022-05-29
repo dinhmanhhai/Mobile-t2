@@ -115,10 +115,12 @@ class _HomeViewState extends State<HomeView> {
                         BlocBuilder<HomeCubit, HomeState>(
                           bloc: _cubit,
                           builder: (context, state) {
-                          return Text(
-                            '   ${Application.displayName}',
-                            style: titleTextStyle.copyWith(
-                                fontSize: 19, fontWeight: FontWeight.w500, color: CustomColors.firebaseYellow),
+                          return FittedBox(
+                            child: Text(
+                              '   ${Application.displayName}',
+                              style: titleTextStyle.copyWith(
+                                  fontSize: 16, fontWeight: FontWeight.w500, color: CustomColors.firebaseYellow),
+                            ),
                           );
                         },),
                       ],
@@ -171,81 +173,103 @@ class _HomeViewState extends State<HomeView> {
           height: 50.h,
           width: 100.w,
           padding: EdgeInsets.all(2.w),
-          child: SafeArea(
-            child: Column(
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        InkWell(
-                          onTap: () => _cubit.changeView(),
-                          child: Icon(
-                            Icons.folder,
-                            color: CustomColors.yellowText,
-                            size: 10.h,
-                          ),
-                        ),
-                        Text(
-                          'Tất cả ghi chú',
-                          style: titleTextStyle.copyWith(
-                            color: CustomColors.regularText,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () => Navigator.pop(context),
-                        child: Align(
-                          alignment: Alignment.topRight,
-                          child: SvgPicture.asset(
-                            "assets/x-icon.svg",
-                            height: 4.h,
-                            fit: BoxFit.fitHeight,
-                          ),
+          child: Column(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      InkWell(
+                        onTap: () => _cubit.changeView(),
+                        child: Icon(
+                          Icons.folder,
+                          color: CustomColors.yellowText,
+                          size: 10.h,
                         ),
                       ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 4.h,
-                ),
-                InkWell(
-                  onTap: () => _cubit.changeView(),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 2.w),
-                    decoration: BoxDecoration(
-                      color: CustomColors.greyText,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-                        BlocBuilder<HomeCubit, HomeState>(
-                          bloc: _cubit,
-                          builder: (context, state) {
-                            if (state is ListTileView) {
-                              return Text(
-                                'Xem dưới dạng khung hình',
-                                style: titleTextStyle.copyWith(color: CustomColors.regularText),
-                              );
-                            } else {
-                              return Text(
-                                'Xem dưới dạng danh sách',
-                                style: titleTextStyle.copyWith(color: CustomColors.regularText),
-                              );
-                            }
-                          },
+                      Text(
+                        'Tất cả ghi chú',
+                        style: titleTextStyle.copyWith(
+                          color: CustomColors.regularText,
                         ),
-                      ],
+                      ),
+                    ],
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: SvgPicture.asset(
+                          "assets/x-icon.svg",
+                          height: 4.h,
+                          fit: BoxFit.fitHeight,
+                        ),
+                      ),
                     ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 4.h,
+              ),
+              InkWell(
+                onTap: () => _cubit.changeView(),
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 2.w),
+                  decoration: BoxDecoration(
+                    color: CustomColors.greyText,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    children: [
+                      BlocBuilder<HomeCubit, HomeState>(
+                        bloc: _cubit,
+                        builder: (context, state) {
+                          if (state is ListTileView) {
+                            return Text(
+                              'Xem dưới dạng khung hình',
+                              style: titleTextStyle.copyWith(color: CustomColors.regularText),
+                            );
+                          } else {
+                            return Text(
+                              'Xem dưới dạng danh sách',
+                              style: titleTextStyle.copyWith(color: CustomColors.regularText),
+                            );
+                          }
+                        },
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              InkWell(
+                onTap: () => _cubit.logout(),
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 2.w),
+                  decoration: BoxDecoration(
+                    color: CustomColors.greyText,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    children: [
+                      InkWell(
+                        onTap: () => _cubit.logout(),
+                        child: Text(
+                          'Đăng xuất',
+                          style: titleTextStyle.copyWith(color: CustomColors.regularText),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

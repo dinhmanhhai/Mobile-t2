@@ -49,7 +49,7 @@ class LoginCubit extends Cubit<LoginState> {
       Response response = await LoginProvider.login(params);
       if(response.data?['status'] == true){
         Application.sharePreference?.putString('token', response.data['data']['token']);
-        Get.toNamed(Routes.home);
+        Get.offNamed(Routes.home);
         return;
       }
       Toastify.showToast(ToastState.failure, "Network Exception".i18n, context);
