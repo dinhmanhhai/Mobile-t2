@@ -69,4 +69,9 @@ class HomeCubit extends Cubit<HomeState> {
       }
     }
   }
+
+  void logout() {
+    Application.sharePreference?.clear();
+    Get.offAndToNamed(Routes.login);
+  }
 }
